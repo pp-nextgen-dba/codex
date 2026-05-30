@@ -541,6 +541,7 @@
         <a href="#github-pages">GitHub Pages</a>
         <a href="#new-project">New Project</a>
         <a href="#recovery">Recovery</a>
+        <a href="#codex-commands">Codex Commands</a>
         <a href="#compact">Save Tokens</a>
         <a href="#cheat-sheet">Cheat Sheet</a>
       </div>
@@ -942,9 +943,66 @@ git diff</code></pre>
         <div class="note warning">Avoid `git reset --hard` unless you truly want to delete uncommitted work.</div>
       </section>
 
+      <section id="codex-commands">
+        <span class="section-kicker">Codex</span>
+        <h2>13. Useful Codex Commands and Prompts</h2>
+        <p>Use these when working inside Codex so the session stays clear and efficient.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Use</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Start Codex</td>
+                <td>Launch Codex from the current project folder.</td>
+                <td><code>codex</code></td>
+              </tr>
+              <tr>
+                <td>Compact session</td>
+                <td>Reduce token usage while keeping the important context.</td>
+                <td><code>/compact</code></td>
+              </tr>
+              <tr>
+                <td>Read memory</td>
+                <td>Tell Codex to load the saved project notes before work starts.</td>
+                <td><code>read memory</code></td>
+              </tr>
+              <tr>
+                <td>Update memory</td>
+                <td>Tell Codex to save the latest project state after changes.</td>
+                <td><code>update memory</code></td>
+              </tr>
+              <tr>
+                <td>Project scan</td>
+                <td>Ask Codex to inspect the codebase before making edits.</td>
+                <td><code>read memory and inspect the project first</code></td>
+              </tr>
+              <tr>
+                <td>Safe edit request</td>
+                <td>Ask for a focused code change with validation.</td>
+                <td><code>apply the change and run tests</code></td>
+              </tr>
+              <tr>
+                <td>Status request</td>
+                <td>Ask Codex for the current repo, branch, and changed files.</td>
+                <td><code>status</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">Only <code>codex</code> and <code>/compact</code> are direct commands here. The others are short prompts that work well in normal Codex chat.</div>
+      </section>
+
       <section id="compact">
         <span class="section-kicker">Tokens</span>
-        <h2>13. Use Compact to Save Tokens</h2>
+        <h2>14. Use Compact to Save Tokens</h2>
         <p>Use compact when the Codex conversation is long and you want to reduce token usage while keeping the important context.</p>
 
         <h3>Simple command</h3>
@@ -973,13 +1031,17 @@ git diff</code></pre>
 
       <section id="cheat-sheet">
         <span class="section-kicker">Reference</span>
-        <h2>14. Commands to Memorize First</h2>
+        <h2>15. Commands to Memorize First</h2>
         <div class="pill-row">
           <span class="pill">pwd</span>
           <span class="pill">ls -la</span>
           <span class="pill">cd ..</span>
           <span class="pill">code .</span>
           <span class="pill">codex</span>
+          <span class="pill">/compact</span>
+          <span class="pill">read memory</span>
+          <span class="pill">update memory</span>
+          <span class="pill">status</span>
           <span class="pill">git status</span>
           <span class="pill">git diff</span>
           <span class="pill">git pull origin main</span>
