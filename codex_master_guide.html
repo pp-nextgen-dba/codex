@@ -250,6 +250,41 @@
       white-space: pre;
     }
 
+    p code,
+    li code,
+    td code,
+    .note code {
+      white-space: normal;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      background: #fbfdff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--soft-blue);
+      color: #22314a;
+      font-size: .92rem;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
     .prompt {
       background: #111827;
       color: #dcfce7;
@@ -351,6 +386,7 @@
       <div class="links">
         <a href="#big-picture">Big Picture</a>
         <a href="#vscode-terminal">Start Codex in VS Code</a>
+        <a href="#platforms">Mac vs Windows</a>
         <a href="#daily-start">Daily Start</a>
         <a href="#memory">Project Memory</a>
         <a href="#memory-template">Memory Template</a>
@@ -388,6 +424,17 @@
           </div>
         </div>
         <div class="note">Simple rule: open the project folder first, then start Codex from that folder.</div>
+        <h3>Why VS Code is better than terminal alone</h3>
+        <p>VS Code gives Codex a better workspace because the project files, terminal, source control, search, and editor are all visible together.</p>
+        <p>Instead of switching between a standalone terminal and separate file windows, you can ask Codex to make changes, review the exact files, run commands, check Git status, and continue editing in the same project window.</p>
+        <ul class="checklist">
+          <li>You can see and edit files immediately.</li>
+          <li>The integrated terminal stays inside the project workspace.</li>
+          <li>Git changes are easier to review before commit or push.</li>
+          <li>Project folders are clearer for beginners.</li>
+          <li>Codex instructions, memory files, and commands are easier to manage.</li>
+          <li>You do less context switching than with terminal alone.</li>
+        </ul>
       </section>
 
       <section id="vscode-terminal">
@@ -417,10 +464,89 @@ ls</code></pre>
           </div>
         </div>
         <div class="note success">If `pwd` shows the project folder before you run `codex`, Codex is starting in the right place.</div>
+        <h3>What integrated terminal means on Mac</h3>
+        <p>The VS Code integrated terminal is the terminal panel that opens inside VS Code, usually at the bottom of the window. On Mac, it normally uses the default Mac shell, which is <code>zsh</code>.</p>
+        <p>You can check your shell with:</p>
+        <pre><code>echo $SHELL</code></pre>
+        <p>If the result is this, your setup is correct:</p>
+        <pre><code>/bin/zsh</code></pre>
+        <div class="note success">Your current Mac VS Code terminal uses <code>/bin/zsh</code>, so you are already using the recommended setup.</div>
+      </section>
+
+      <section id="platforms">
+        <h2>3. Mac vs Windows Platform Differences</h2>
+        <p>VS Code looks mostly the same on Mac and Windows. The biggest difference is the terminal underneath VS Code.</p>
+        <div class="grid">
+          <div class="card">
+            <strong>Mac</strong>
+            <span>Mac is Unix-like and usually uses <code>zsh</code>. Many developer commands work naturally.</span>
+            <pre><code>cd ~/codex/repo_name
+ls
+pwd
+codex</code></pre>
+          </div>
+          <div class="card">
+            <strong>Windows</strong>
+            <span>Windows may use PowerShell, Command Prompt, Git Bash, or WSL. The commands can change depending on the terminal.</span>
+            <pre><code>cd C:\Users\YourName\codex\repo_name
+dir
+Get-Location</code></pre>
+          </div>
+        </div>
+        <h3>Best beginner recommendation</h3>
+        <ul class="checklist">
+          <li>On Mac, use VS Code with the integrated terminal running <code>zsh</code>.</li>
+          <li>On Windows, use VS Code with WSL Ubuntu when possible.</li>
+          <li>If WSL is not available, Git Bash is usually easier for Codex examples than Command Prompt.</li>
+        </ul>
+        <h3>Why WSL helps on Windows</h3>
+        <p>WSL gives Windows a Linux-style terminal. That makes many Codex instructions easier to follow because commands such as <code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>git</code>, <code>npm</code>, and <code>python</code> behave more like they do on Mac and Linux.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Mac</th>
+              <th>Windows</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Default shell</td>
+              <td><code>zsh</code></td>
+              <td>PowerShell or Command Prompt</td>
+            </tr>
+            <tr>
+              <td>Recommended shell</td>
+              <td><code>zsh</code></td>
+              <td>WSL Ubuntu</td>
+            </tr>
+            <tr>
+              <td>Path style</td>
+              <td><code>/Users/name/project</code></td>
+              <td><code>C:\Users\name\project</code> or <code>/home/name/project</code> in WSL</td>
+            </tr>
+            <tr>
+              <td>List files</td>
+              <td><code>ls</code></td>
+              <td><code>dir</code> in PowerShell, <code>ls</code> in WSL</td>
+            </tr>
+            <tr>
+              <td>Environment variable example</td>
+              <td><code>$HOME</code></td>
+              <td><code>$env:USERPROFILE</code> in PowerShell</td>
+            </tr>
+            <tr>
+              <td>Scripts</td>
+              <td><code>.sh</code> scripts work naturally</td>
+              <td>Best inside WSL or Git Bash</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">Simple summary: VS Code is similar on both platforms, but terminal commands can differ. Mac is already Unix-like. Windows is closest to Mac/Linux when using WSL.</div>
       </section>
 
       <section id="daily-start">
-        <h2>3. Daily Start Workflow</h2>
+        <h2>4. Daily Start Workflow</h2>
         <p>Use this every time before editing an existing project.</p>
         <pre><code>cd ~/codex/study_plan/git_repo/study-dashboard
 git status
@@ -437,7 +563,7 @@ Do not modify files until I ask.</code></pre>
       </section>
 
       <section id="memory">
-        <h2>4. How to Create Memory for Each Repo or Project</h2>
+        <h2>5. How to Create Memory for Each Repo or Project</h2>
         <p>A memory file is a plain text Markdown file. Keep one memory file per important project.</p>
         <h3>Where memory files live</h3>
         <pre><code>~/.codex/memories/</code></pre>
@@ -474,7 +600,7 @@ Include:
       </section>
 
       <section id="memory-template">
-        <h2>5. Copy This Project Memory Template</h2>
+        <h2>6. Copy This Project Memory Template</h2>
         <p>Paste this into a new memory file, then fill in the blanks.</p>
         <pre><code># Project Name Memory
 
@@ -502,7 +628,7 @@ Include:
       </section>
 
       <section id="navigation">
-        <h2>6. Terminal Basics</h2>
+        <h2>7. Terminal Basics</h2>
         <div class="grid">
           <div class="card">
             <strong>Show current folder</strong>
@@ -525,7 +651,7 @@ ls -la</code></pre>
       </section>
 
       <section id="git">
-        <h2>7. Git Workflow for Beginners</h2>
+        <h2>8. Git Workflow for Beginners</h2>
         <p>Git saves versions of your project. GitHub stores the project online.</p>
         <h3>Check status</h3>
         <pre><code>git status</code></pre>
@@ -545,7 +671,7 @@ git push origin main</code></pre>
       </section>
 
       <section id="safe-prompts">
-        <h2>8. Safe Codex Prompts</h2>
+        <h2>9. Safe Codex Prompts</h2>
         <h3>Understand the project first</h3>
         <pre class="prompt"><code>Analyze this project and explain:
 1. Folder structure
@@ -569,7 +695,7 @@ If there is no validation command, inspect the changed HTML, CSS, and JavaScript
       </section>
 
       <section id="github-pages">
-        <h2>9. GitHub Pages Workflow</h2>
+        <h2>10. GitHub Pages Workflow</h2>
         <p>For static websites, GitHub Pages can publish your HTML project online.</p>
         <h3>Common publish commands</h3>
         <pre><code>git status
@@ -583,7 +709,7 @@ https://pp-nextgen-dba.github.io/codex/codex_master_guide.html</code></pre>
       </section>
 
       <section id="new-project">
-        <h2>10. Start a New Project with Codex</h2>
+        <h2>11. Start a New Project with Codex</h2>
         <div class="steps">
           <div class="step">
             <strong>Create the project folder</strong>
@@ -620,7 +746,7 @@ After creating files, summarize the structure and create a memory note for this 
       </section>
 
       <section id="recovery">
-        <h2>11. Recovery Commands</h2>
+        <h2>12. Recovery Commands</h2>
         <p>Use recovery commands only after checking what changed.</p>
         <h3>View changed files</h3>
         <pre><code>git status
@@ -635,7 +761,7 @@ git diff</code></pre>
       </section>
 
       <section id="compact">
-        <h2>12. Use Compact to Save Tokens</h2>
+        <h2>13. Use Compact to Save Tokens</h2>
         <p>Use compact when the Codex conversation is long and you want to reduce token usage while keeping the important context.</p>
 
         <h3>Simple command</h3>
@@ -663,7 +789,7 @@ git diff</code></pre>
       </section>
 
       <section id="cheat-sheet">
-        <h2>13. Commands to Memorize First</h2>
+        <h2>14. Commands to Memorize First</h2>
         <div class="pill-row">
           <span class="pill">pwd</span>
           <span class="pill">ls -la</span>
