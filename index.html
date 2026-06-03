@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codex Master Guide for Beginners</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --ink: #172033;
+      --muted: #5f6f89;
+      --panel: #ffffff;
+      --line: #d9e2ef;
+      --blue: #2563eb;
+      --green: #17803d;
+      --orange: #c25a14;
+      --red: #c53030;
+      --code-bg: #0f172a;
+      --code-text: #dbeafe;
+      --soft-blue: #eaf2ff;
+      --soft-green: #ecfdf3;
+      --soft-orange: #fff7ed;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(37, 99, 235, .34), transparent 34%),
+        linear-gradient(135deg, #0f172a 0%, #172033 55%, #0b1220 100%);
+      color: white;
+      padding: 46px 18px 36px;
+    }
+
+    .hero-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 14px 0 0;
+      color: #cbd5e1;
+      font-size: 1.08rem;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .badge {
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 999px;
+      color: #e5edff;
+      padding: 7px 12px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .button.primary {
+      background: #ffffff;
+      color: #172033;
+    }
+
+    .button.secondary {
+      color: #e5edff;
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .layout {
+      width: min(1120px, calc(100% - 28px));
+      margin: 24px auto 58px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    nav {
+      position: sticky;
+      top: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    nav a {
+      display: block;
+      padding: 9px 10px;
+      border-radius: 7px;
+      color: #27364f;
+      font-weight: 650;
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    nav a:hover {
+      background: var(--soft-blue);
+      color: #1749b8;
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, .04);
+      scroll-margin-top: 18px;
+    }
+
+    .quick-start {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quick-start h2 {
+      margin-bottom: 6px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .quick-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+    }
+
+    .quick-item span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      margin-bottom: 8px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: var(--soft-blue);
+      color: #1749b8;
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.35rem, 3vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 1.05rem;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .note {
+      background: var(--soft-blue);
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
+      padding: 13px 15px;
+      margin: 14px 0 18px;
+      font-weight: 650;
+      color: #22314a;
+    }
+
+    .warning {
+      background: #fff1f2;
+      border-left-color: var(--red);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left-color: var(--green);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .card:hover,
+    .quick-item:hover,
+    .checklist li:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, .07);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .card span {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px 15px 15px 54px;
+      background: #fbfdff;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 15px;
+      top: 16px;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    pre {
+      position: relative;
+      margin: 10px 0 16px;
+      padding: 15px 48px 15px 15px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid #1e293b;
+    }
+
+    .copy-code {
+      position: sticky;
+      left: calc(100% - 36px);
+      top: 8px;
+      float: right;
+      margin: -5px -38px 0 8px;
+      border: 1px solid rgba(219, 234, 254, .28);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .08);
+      color: #dbeafe;
+      cursor: pointer;
+      font-size: .78rem;
+      font-weight: 800;
+      padding: 5px 7px;
+    }
+
+    .copy-code:hover {
+      background: rgba(255, 255, 255, .16);
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: .93rem;
+      white-space: pre;
+    }
+
+    p code,
+    li code,
+    td code,
+    .note code {
+      white-space: normal;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      background: #fbfdff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--soft-blue);
+      color: #22314a;
+      font-size: .92rem;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .prompt {
+      background: #111827;
+      color: #dcfce7;
+    }
+
+    .checklist {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .checklist li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fbfdff;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      background: #172033;
+      color: #dbeafe;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: .88rem;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .94rem;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      border: 0;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      padding: 10px 13px;
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    @media (max-width: 880px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+      }
+
+      nav .links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        padding-top: 32px;
+      }
+
+      nav .links {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      code {
+        font-size: .82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Codex Master Guide for Beginners</h1>
+      <p>A practical Mac, VS Code, Terminal, Git, GitHub, and Codex workflow for starting projects, asking Codex for help, saving project memory, and publishing updates.</p>
+      <div class="badges">
+        <span class="badge">Start in VS Code</span>
+        <span class="badge">Project Memory</span>
+        <span class="badge">Daily Workflow</span>
+        <span class="badge">Git Basics</span>
+        <span class="badge">GitHub Pages</span>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="#quick-start">Start Here</a>
+        <a class="button secondary" href="#cheat-sheet">View Commands</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav>
+      <h2>Guide Menu</h2>
+      <div class="links">
+        <a href="#big-picture">Big Picture</a>
+        <a href="#vscode-terminal">Start Codex in VS Code</a>
+        <a href="#platforms">Mac vs Windows</a>
+        <a href="#daily-start">Daily Start</a>
+        <a href="#memory">Project Memory</a>
+        <a href="#memory-template">Memory Template</a>
+        <a href="#navigation">Terminal Basics</a>
+        <a href="#git">Git Workflow</a>
+        <a href="#safe-prompts">Safe Prompts</a>
+        <a href="#github-pages">GitHub Pages</a>
+        <a href="#new-project">New Project</a>
+        <a href="#recovery">Recovery</a>
+        <a href="#codex-commands">Codex Commands</a>
+        <a href="#compact">Save Tokens</a>
+        <a href="#cheat-sheet">Cheat Sheet</a>
+      </div>
+    </nav>
+
+    <main>
+      <section id="quick-start" class="quick-start">
+        <span class="section-kicker">Start here</span>
+        <h2>Quick Start for New Codex Users</h2>
+        <p class="lead">Use these three steps when you open a project and want Codex to help safely.</p>
+        <div class="quick-grid">
+          <div class="quick-item">
+            <span>Step 1</span>
+            <strong>Open the project in VS Code</strong>
+            <p>Start from the folder that contains the files you want Codex to edit.</p>
+          </div>
+          <div class="quick-item">
+            <span>Step 2</span>
+            <strong>Open the VS Code terminal</strong>
+            <p>Run <code>pwd</code> and <code>git status</code> before starting work.</p>
+          </div>
+          <div class="quick-item">
+            <span>Step 3</span>
+            <strong>Start Codex from that folder</strong>
+            <p>Run <code>codex</code>, then ask it to read memory and inspect the project first.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="big-picture">
+        <span class="section-kicker">Foundation</span>
+        <h2>1. Big Picture</h2>
+        <p class="lead">Codex works best when it starts inside the correct project folder and knows the project history.</p>
+        <div class="grid">
+          <div class="card">
+            <strong>VS Code</strong>
+            <span>Your editor. Open the project folder here so you can see files and changes.</span>
+          </div>
+          <div class="card">
+            <strong>Terminal</strong>
+            <span>The command window. Use it to move folders, start Codex, and run Git commands.</span>
+          </div>
+          <div class="card">
+            <strong>Codex</strong>
+            <span>Your coding assistant. Start it from the project folder so it can read and edit the right files.</span>
+          </div>
+          <div class="card">
+            <strong>Project Memory</strong>
+            <span>A short note file that tells Codex important facts about each repo or project.</span>
+          </div>
+        </div>
+        <div class="note">Simple rule: open the project folder first, then start Codex from that folder.</div>
+        <h3>Why VS Code is better than terminal alone</h3>
+        <p>VS Code gives Codex a better workspace because the project files, terminal, source control, search, and editor are all visible together.</p>
+        <p>Instead of switching between a standalone terminal and separate file windows, you can ask Codex to make changes, review the exact files, run commands, check Git status, and continue editing in the same project window.</p>
+        <ul class="checklist">
+          <li>You can see and edit files immediately.</li>
+          <li>The integrated terminal stays inside the project workspace.</li>
+          <li>Git changes are easier to review before commit or push.</li>
+          <li>Project folders are clearer for beginners.</li>
+          <li>Codex instructions, memory files, and commands are easier to manage.</li>
+          <li>You do less context switching than with terminal alone.</li>
+        </ul>
+      </section>
+
+      <section id="vscode-terminal">
+        <span class="section-kicker">Mac setup</span>
+        <h2>2. How to Start Codex in a New VS Code Terminal</h2>
+        <p>Use this when you are already inside VS Code and want Codex to work on the open project.</p>
+        <div class="steps">
+          <div class="step">
+            <strong>Open the project folder in VS Code</strong>
+            <p>In Terminal, go to the project folder and open it:</p>
+            <pre><code>cd ~/codex/study_plan/git_repo/study-dashboard
+code .</code></pre>
+          </div>
+          <div class="step">
+            <strong>Open a new Terminal inside VS Code</strong>
+            <p>Use the menu: <strong>Terminal &gt; New Terminal</strong></p>
+            <p>Shortcut on Mac:</p>
+            <pre><code>Control + `</code></pre>
+          </div>
+          <div class="step">
+            <strong>Check that Terminal is in the project folder</strong>
+            <pre><code>pwd
+ls</code></pre>
+          </div>
+          <div class="step">
+            <strong>Start Codex</strong>
+            <pre><code>codex</code></pre>
+          </div>
+        </div>
+        <div class="note success">If `pwd` shows the project folder before you run `codex`, Codex is starting in the right place.</div>
+        <h3>What integrated terminal means on Mac</h3>
+        <p>The VS Code integrated terminal is the terminal panel that opens inside VS Code, usually at the bottom of the window. On Mac, it normally uses the default Mac shell, which is <code>zsh</code>.</p>
+        <p>You can check your shell with:</p>
+        <pre><code>echo $SHELL</code></pre>
+        <p>If the result is this, your setup is correct:</p>
+        <pre><code>/bin/zsh</code></pre>
+        <div class="note success">Your current Mac VS Code terminal uses <code>/bin/zsh</code>, so you are already using the recommended setup.</div>
+      </section>
+
+      <section id="platforms">
+        <span class="section-kicker">Platforms</span>
+        <h2>3. Mac vs Windows Platform Differences</h2>
+        <p>VS Code looks mostly the same on Mac and Windows. The biggest difference is the terminal underneath VS Code.</p>
+        <div class="grid">
+          <div class="card">
+            <strong>Mac</strong>
+            <span>Mac is Unix-like and usually uses <code>zsh</code>. Many developer commands work naturally.</span>
+            <pre><code>cd ~/codex/repo_name
+ls
+pwd
+codex</code></pre>
+          </div>
+          <div class="card">
+            <strong>Windows</strong>
+            <span>Windows may use PowerShell, Command Prompt, Git Bash, or WSL. The commands can change depending on the terminal.</span>
+            <pre><code>cd C:\Users\YourName\codex\repo_name
+dir
+Get-Location</code></pre>
+          </div>
+        </div>
+        <h3>Best beginner recommendation</h3>
+        <ul class="checklist">
+          <li>On Mac, use VS Code with the integrated terminal running <code>zsh</code>.</li>
+          <li>On Windows, use VS Code with WSL Ubuntu when possible.</li>
+          <li>If WSL is not available, Git Bash is usually easier for Codex examples than Command Prompt.</li>
+        </ul>
+        <h3>Why WSL helps on Windows</h3>
+        <p>WSL gives Windows a Linux-style terminal. That makes many Codex instructions easier to follow because commands such as <code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>git</code>, <code>npm</code>, and <code>python</code> behave more like they do on Mac and Linux.</p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>Mac</th>
+                <th>Windows</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Default shell</td>
+                <td><code>zsh</code></td>
+                <td>PowerShell or Command Prompt</td>
+              </tr>
+              <tr>
+                <td>Recommended shell</td>
+                <td><code>zsh</code></td>
+                <td>WSL Ubuntu</td>
+              </tr>
+              <tr>
+                <td>Path style</td>
+                <td><code>/Users/name/project</code></td>
+                <td><code>C:\Users\name\project</code> or <code>/home/name/project</code> in WSL</td>
+              </tr>
+              <tr>
+                <td>List files</td>
+                <td><code>ls</code></td>
+                <td><code>dir</code> in PowerShell, <code>ls</code> in WSL</td>
+              </tr>
+              <tr>
+                <td>Environment variable example</td>
+                <td><code>$HOME</code></td>
+                <td><code>$env:USERPROFILE</code> in PowerShell</td>
+              </tr>
+              <tr>
+                <td>Scripts</td>
+                <td><code>.sh</code> scripts work naturally</td>
+                <td>Best inside WSL or Git Bash</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Simple summary: VS Code is similar on both platforms, but terminal commands can differ. Mac is already Unix-like. Windows is closest to Mac/Linux when using WSL.</div>
+      </section>
+
+      <section id="daily-start">
+        <span class="section-kicker">Daily flow</span>
+        <h2>4. Daily Start Workflow</h2>
+        <p>Use this every time before editing an existing project.</p>
+        <pre><code>cd ~/codex/study_plan/git_repo/study-dashboard
+git status
+git pull origin main
+code .
+codex</code></pre>
+        <h3>First message to Codex</h3>
+        <pre class="prompt"><code>Read the project memory first:
+
+~/.codex/memories/study-dashboard.md
+
+Then check git status and summarize the current project.
+Do not modify files until I ask.</code></pre>
+      </section>
+
+      <section id="memory">
+        <span class="section-kicker">Memory</span>
+        <h2>5. How to Create Memory for Each Repo or Project</h2>
+        <p>A memory file is a plain text Markdown file. Keep one memory file per important project.</p>
+        <h3>Where memory files live</h3>
+        <pre><code>~/.codex/memories/</code></pre>
+        <h3>Create a memory folder if it does not exist</h3>
+        <pre><code>mkdir -p ~/.codex/memories</code></pre>
+        <h3>Create or open one memory file per project</h3>
+        <pre><code>code ~/.codex/memories/study-dashboard.md
+code ~/.codex/memories/codex-guide.md
+code ~/.codex/memories/my-new-project.md</code></pre>
+        <div class="note">Use a simple filename that matches the repo name. Example: repo `study-dashboard` uses memory file `study-dashboard.md`.</div>
+
+        <h3>What to save in project memory</h3>
+        <ul class="checklist">
+          <li>Project path on your Mac</li>
+          <li>GitHub remote URL</li>
+          <li>Main files and folders</li>
+          <li>How to run or test the project</li>
+          <li>Important passwords, PIN behavior, or config notes only if they are safe to store locally</li>
+          <li>Recent changes Codex should remember</li>
+          <li>Special warnings, such as service worker cache or browser compatibility</li>
+        </ul>
+
+        <h3>Ask Codex to update memory</h3>
+        <pre class="prompt"><code>Update this project memory after the work is complete:
+
+~/.codex/memories/study-dashboard.md
+
+Include:
+- Project path
+- Files changed
+- New workflow notes
+- Validation command
+- Any warnings for future Codex sessions</code></pre>
+      </section>
+
+      <section id="memory-template">
+        <span class="section-kicker">Template</span>
+        <h2>6. Copy This Project Memory Template</h2>
+        <p>Paste this into a new memory file, then fill in the blanks.</p>
+        <pre><code># Project Name Memory
+
+- Project path: `/full/path/to/project`.
+- GitHub remote: `https://github.com/OWNER/REPO.git`.
+- Current main branch: `main`.
+- Project type: static HTML, React app, Node app, Python app, or other.
+- Main entry file: `index.html`.
+- Main CSS file: `css/style.css`.
+- Main JavaScript file: `js/app.js`.
+- Validation command: `npm test`, `node tools/validate-project.mjs`, or manual browser test.
+- Local run command: `python3 -m http.server 8000`, `npm run dev`, or other.
+
+## Important Workflow
+
+- Start from the project folder before running Codex.
+- Check `git status` before edits.
+- Use a branch before large changes.
+- Do not change unrelated files.
+
+## Recent Notes
+
+- Add short notes here after each important update.
+- Include links, routes, PIN rules, deployment notes, and known problems.</code></pre>
+      </section>
+
+      <section id="navigation">
+        <span class="section-kicker">Terminal</span>
+        <h2>7. Terminal Basics</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Show current folder</strong>
+            <pre><code>pwd</code></pre>
+          </div>
+          <div class="card">
+            <strong>List files</strong>
+            <pre><code>ls
+ls -la</code></pre>
+          </div>
+          <div class="card">
+            <strong>Move into a folder</strong>
+            <pre><code>cd folder-name</code></pre>
+          </div>
+          <div class="card">
+            <strong>Move up one folder</strong>
+            <pre><code>cd ..</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="git">
+        <span class="section-kicker">Git</span>
+        <h2>8. Git Workflow for Beginners</h2>
+        <p>Git saves versions of your project. GitHub stores the project online.</p>
+        <h3>Check status</h3>
+        <pre><code>git status</code></pre>
+        <h3>See what changed</h3>
+        <pre><code>git diff</code></pre>
+        <h3>Create a work branch for changes</h3>
+        <pre><code>git switch -c docs/update-guide</code></pre>
+        <h3>Save your work</h3>
+        <pre><code>git add .
+git commit -m "Update guide"
+git push -u origin docs/update-guide</code></pre>
+        <h3>When working directly on main</h3>
+        <pre><code>git add .
+git commit -m "Update website"
+git push origin main</code></pre>
+        <div class="note warning">Be careful with commands that discard changes, such as `git reset --hard` or `git checkout -- .`. Ask Codex to explain the risk before using them.</div>
+      </section>
+
+      <section id="safe-prompts">
+        <span class="section-kicker">Prompts</span>
+        <h2>9. Safe Codex Prompts</h2>
+        <h3>Understand the project first</h3>
+        <pre class="prompt"><code>Analyze this project and explain:
+1. Folder structure
+2. Main entry files
+3. How to run or test it
+4. Current git status
+
+Do not modify files.</code></pre>
+        <h3>Ask for a plan before edits</h3>
+        <pre class="prompt"><code>Read the project memory first.
+Then propose a short plan.
+Tell me which files you will edit.
+Wait for my approval before changing files.</code></pre>
+        <h3>Make a focused change</h3>
+        <pre class="prompt"><code>Update only the requested page.
+Keep the existing design style.
+After editing, check git diff and summarize the changes.</code></pre>
+        <h3>Ask Codex to validate</h3>
+        <pre class="prompt"><code>Run the project validation command from memory.
+If there is no validation command, inspect the changed HTML, CSS, and JavaScript for syntax mistakes.</code></pre>
+      </section>
+
+      <section id="github-pages">
+        <span class="section-kicker">Publish</span>
+        <h2>10. GitHub Pages Workflow</h2>
+        <p>For static websites, GitHub Pages can publish your HTML project online.</p>
+        <h3>Common publish commands</h3>
+        <pre><code>git status
+git add .
+git commit -m "Update website"
+git push origin main</code></pre>
+        <h3>Example website URLs</h3>
+        <pre><code>https://pp-nextgen-dba.github.io/study-dashboard/
+https://pp-nextgen-dba.github.io/codex/codex_master_guide.html</code></pre>
+        <div class="note">If the live website does not update, hard-refresh the browser. Some projects also use service worker caching.</div>
+      </section>
+
+      <section id="new-project">
+        <span class="section-kicker">New project</span>
+        <h2>11. Start a New Project with Codex</h2>
+        <div class="steps">
+          <div class="step">
+            <strong>Create the project folder</strong>
+            <pre><code>mkdir -p ~/codex/projects/my-new-project
+cd ~/codex/projects/my-new-project</code></pre>
+          </div>
+          <div class="step">
+            <strong>Start Git and open VS Code</strong>
+            <pre><code>git init
+code .</code></pre>
+          </div>
+          <div class="step">
+            <strong>Open VS Code Terminal and start Codex</strong>
+            <pre><code>pwd
+codex</code></pre>
+          </div>
+          <div class="step">
+            <strong>Create memory for the new project</strong>
+            <pre><code>mkdir -p ~/.codex/memories
+code ~/.codex/memories/my-new-project.md</code></pre>
+          </div>
+        </div>
+        <h3>First Codex prompt for a new project</h3>
+        <pre class="prompt"><code>Create a beginner-friendly static website project.
+
+Requirements:
+- index.html
+- css/style.css
+- js/app.js
+- Mobile-friendly layout
+- GitHub Pages compatible
+
+After creating files, summarize the structure and create a memory note for this project.</code></pre>
+      </section>
+
+      <section id="recovery">
+        <span class="section-kicker">Recovery</span>
+        <h2>12. Recovery Commands</h2>
+        <p>Use recovery commands only after checking what changed.</p>
+        <h3>View changed files</h3>
+        <pre><code>git status
+git diff</code></pre>
+        <h3>Restore one file</h3>
+        <pre><code>git restore path/to/file.html</code></pre>
+        <h3>Undo the last commit but keep the file changes</h3>
+        <pre><code>git reset --soft HEAD~1</code></pre>
+        <h3>View commit history</h3>
+        <pre><code>git log --oneline</code></pre>
+        <div class="note warning">Avoid `git reset --hard` unless you truly want to delete uncommitted work.</div>
+      </section>
+
+      <section id="codex-commands">
+        <span class="section-kicker">Codex</span>
+        <h2>13. Useful Codex Commands and Prompts</h2>
+        <p>Use these when working inside Codex so the session stays clear and efficient.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Use</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Start Codex</td>
+                <td>Launch Codex from the current project folder.</td>
+                <td><code>codex</code></td>
+              </tr>
+              <tr>
+                <td>Compact session</td>
+                <td>Reduce token usage while keeping the important context.</td>
+                <td><code>/compact</code></td>
+              </tr>
+              <tr>
+                <td>Read memory</td>
+                <td>Tell Codex to load the saved project notes before work starts.</td>
+                <td><code>read memory</code></td>
+              </tr>
+              <tr>
+                <td>Update memory</td>
+                <td>Tell Codex to save the latest project state after changes.</td>
+                <td><code>update memory</code></td>
+              </tr>
+              <tr>
+                <td>Project scan</td>
+                <td>Ask Codex to inspect the codebase before making edits.</td>
+                <td><code>read memory and inspect the project first</code></td>
+              </tr>
+              <tr>
+                <td>Safe edit request</td>
+                <td>Ask for a focused code change with validation.</td>
+                <td><code>apply the change and run tests</code></td>
+              </tr>
+              <tr>
+                <td>Status request</td>
+                <td>Ask Codex for the current repo, branch, and changed files.</td>
+                <td><code>status</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">Only <code>codex</code> and <code>/compact</code> are direct commands here. The others are short prompts that work well in normal Codex chat.</div>
+      </section>
+
+      <section id="compact">
+        <span class="section-kicker">Tokens</span>
+        <h2>14. Use Compact to Save Tokens</h2>
+        <p>Use compact when the Codex conversation is long and you want to reduce token usage while keeping the important context.</p>
+
+        <h3>Simple command</h3>
+        <pre class="prompt"><code>/compact</code></pre>
+
+        <h3>Better prompt before starting a new task</h3>
+        <pre class="prompt"><code>Compact this conversation and keep:
+- Current project path
+- Current branch
+- Files changed
+- User requirements
+- Validation results
+- Important project memory notes
+- Next steps</code></pre>
+
+        <h3>When to compact</h3>
+        <ul class="checklist">
+          <li>After a feature or fix is completed</li>
+          <li>Before starting a new unrelated task</li>
+          <li>After Codex has read many files</li>
+          <li>When the conversation is long and token usage is high</li>
+        </ul>
+
+        <div class="note">Compact is for conversation context. For permanent project facts, save them in a memory file under `~/.codex/memories/`.</div>
+      </section>
+
+      <section id="cheat-sheet">
+        <span class="section-kicker">Reference</span>
+        <h2>15. Commands to Memorize First</h2>
+        <div class="pill-row">
+          <span class="pill">pwd</span>
+          <span class="pill">ls -la</span>
+          <span class="pill">cd ..</span>
+          <span class="pill">code .</span>
+          <span class="pill">codex</span>
+          <span class="pill">/compact</span>
+          <span class="pill">read memory</span>
+          <span class="pill">update memory</span>
+          <span class="pill">status</span>
+          <span class="pill">git status</span>
+          <span class="pill">git diff</span>
+          <span class="pill">git pull origin main</span>
+          <span class="pill">git switch -c branch-name</span>
+          <span class="pill">git add .</span>
+          <span class="pill">git commit -m "message"</span>
+          <span class="pill">git push origin main</span>
+        </div>
+        <div class="note success">These commands are enough to start Codex, inspect a project, save changes, and publish most static HTML updates.</div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Personal Codex reference for Mac, VS Code, Terminal, Git, GitHub, and project memory.
+  </footer>
+  <a class="back-top" href="#quick-start" aria-label="Back to top">Top</a>
+  <script>
+    document.querySelectorAll("pre").forEach((block) => {
+      const code = block.querySelector("code");
+      if (!code) return;
+
+      const button = document.createElement("button");
+      button.className = "copy-code";
+      button.type = "button";
+      button.textContent = "Copy";
+      button.setAttribute("aria-label", "Copy code block");
+
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(code.innerText);
+          button.textContent = "Copied";
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 1400);
+        } catch {
+          button.textContent = "Select";
+        }
+      });
+
+      block.prepend(button);
+    });
+  </script>
+</body>
+</html>
