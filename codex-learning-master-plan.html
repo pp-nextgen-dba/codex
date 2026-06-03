@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Learning Master Plan</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --ink: #16211f;
+      --muted: #61706b;
+      --line: #dbe1dc;
+      --green: #26715f;
+      --teal: #0f8891;
+      --blue: #356cc6;
+      --gold: #b36b14;
+      --red: #b44646;
+      --shadow: 0 14px 34px rgba(32, 45, 42, .09);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.86), rgba(246,247,244,.96)),
+        repeating-linear-gradient(90deg, rgba(22,33,31,.035) 0 1px, transparent 1px 58px),
+        repeating-linear-gradient(0deg, rgba(22,33,31,.025) 0 1px, transparent 1px 58px);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 6px;
+      padding: .55rem .75rem;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: #eef7f3;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 24px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(14px);
+      overflow: auto;
+    }
+
+    main {
+      padding: 28px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: conic-gradient(from 180deg, var(--green), var(--teal), var(--blue), var(--gold), var(--green));
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0;
+      box-shadow: var(--shadow);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 4.4rem);
+      line-height: .95;
+      margin-bottom: 16px;
+      letter-spacing: 0;
+      max-width: 980px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .nav {
+      display: grid;
+      gap: 7px;
+      margin-top: 18px;
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 6px;
+    }
+
+    .nav a:hover {
+      background: #eef2ef;
+      color: var(--green);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      align-items: stretch;
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+
+    .hero-text {
+      padding: 36px 0 12px;
+    }
+
+    .hero p {
+      max-width: 740px;
+      font-size: 1.05rem;
+    }
+
+    .command-visual {
+      min-height: 320px;
+      border: 1px solid #24302d;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #111916;
+      color: #dff5ec;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .terminal-top {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      padding: 11px 13px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: #17231f;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: var(--red);
+    }
+
+    .dot:nth-child(2) { background: var(--gold); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .terminal-body {
+      padding: 18px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .9rem;
+      display: grid;
+      align-content: center;
+      gap: 11px;
+    }
+
+    .prompt { color: #7ddbc2; }
+    .output { color: #b9c7c2; }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0;
+    }
+
+    .tabs,
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      min-width: min(100%, 340px);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: .62rem .75rem;
+      background: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .metric {
+      display: grid;
+      gap: 7px;
+      min-height: 116px;
+    }
+
+    .metric strong {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .bar {
+      height: 9px;
+      border-radius: 99px;
+      background: #e7ece8;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--green), var(--teal));
+      transition: width .25s ease;
+    }
+
+    .module-list,
+    .knowledge-list,
+    .habit-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .module,
+    .kb-item,
+    .habit {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 14px;
+    }
+
+    .module-head,
+    .kb-head,
+    .habit {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .module-head label,
+    .habit label {
+      display: grid;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+      margin-top: 2px;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: .76rem;
+      border: 1px solid var(--line);
+      background: #f7f9f7;
+      color: #43504c;
+      border-radius: 999px;
+      padding: .18rem .48rem;
+      white-space: nowrap;
+    }
+
+    .level {
+      border-left: 4px solid var(--green);
+    }
+
+    .level[data-level="Builder"] { border-left-color: var(--blue); }
+    .level[data-level="Operator"] { border-left-color: var(--gold); }
+    .level[data-level="Master"] { border-left-color: var(--teal); }
+
+    .week {
+      display: grid;
+      gap: 10px;
+    }
+
+    .week ul,
+    .kb-item ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .note-area {
+      min-height: 140px;
+      width: 100%;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: .75rem;
+      background: white;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .danger:hover {
+      border-color: var(--red);
+      color: var(--red);
+      background: #fff4f4;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 960px) {
+      .app { grid-template-columns: 1fr; }
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      main { padding: 20px; }
+      .hero { grid-template-columns: 1fr; }
+      .span-3,
+      .span-4,
+      .span-6,
+      .span-8 { grid-column: span 12; }
+    }
+
+    @media (max-width: 620px) {
+      .toolbar { display: grid; }
+      .tabs button,
+      .filters button,
+      .search { width: 100%; }
+      .module-head,
+      .kb-head,
+      .habit { grid-template-columns: auto minmax(0, 1fr); }
+      .module-head .tag,
+      .kb-head .tag { grid-column: 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="mark">CX</div>
+        <div>
+          <h2>Codex Master Plan</h2>
+          <p class="muted">A practical learning system for Paul: Windows, PowerShell, Python, git, GitHub, Oracle, and PostgreSQL work.</p>
+        </div>
+      </div>
+      <div class="bar" aria-label="Overall progress"><span id="sideProgress"></span></div>
+      <p><strong id="sidePercent">0%</strong> complete</p>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#knowledgebase">Knowledgebase</a>
+        <a href="#practice">Practice</a>
+        <a href="#notes">Notes</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero" id="dashboard">
+        <div class="hero-text">
+          <h1>Master Codex by building real DBA and Python workflows.</h1>
+          <p class="muted">Track your progress, learn the habits that make Codex effective, and keep a compact knowledgebase for day-to-day use.</p>
+          <div class="toolbar">
+            <div class="tabs" role="group" aria-label="Progress presets">
+              <button id="showAll" class="active">Show All</button>
+              <button id="showOpen">Open Items</button>
+              <button id="showDone">Done</button>
+            </div>
+            <input id="search" class="search" type="search" placeholder="Search roadmap and knowledgebase">
+          </div>
+        </div>
+        <div class="command-visual" aria-label="Codex workflow terminal illustration">
+          <div class="terminal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="terminal-body">
+            <div><span class="prompt">PS C:\codex&gt;</span> codex</div>
+            <div class="output">Read AGENTS.md, inspect files, make scoped edits.</div>
+            <div><span class="prompt">plan&gt;</span> understand, implement, verify, explain</div>
+            <div class="output">Best results: clear goal, useful context, small checkpoints.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" aria-label="Progress dashboard">
+        <div class="panel metric span-3">
+          <span class="muted">Overall</span>
+          <strong id="overallPercent">0%</strong>
+          <div class="bar"><span id="overallBar"></span></div>
+        </div>
+        <div class="panel metric span-3">
+          <span class="muted">Roadmap Tasks</span>
+          <strong id="taskCount">0/0</strong>
+          <div class="bar"><span id="taskBar"></span></div>
+        </div>
+        <div class="panel metric span-3">
+          <span class="muted">Habits</span>
+          <strong id="habitCount">0/0</strong>
+          <div class="bar"><span id="habitBar"></span></div>
+        </div>
+        <div class="panel metric span-3">
+          <span class="muted">Focus Level</span>
+          <strong id="focusLevel">Starter</strong>
+          <span class="muted" id="nextStep">Begin with setup basics.</span>
+        </div>
+      </section>
+
+      <section class="grid" id="roadmap" style="margin-top: 16px;">
+        <div class="panel span-8">
+          <h2>Learning Roadmap</h2>
+          <div class="filters" role="group" aria-label="Roadmap levels">
+            <button class="levelFilter active" data-level="all">All</button>
+            <button class="levelFilter" data-level="Starter">Starter</button>
+            <button class="levelFilter" data-level="Builder">Builder</button>
+            <button class="levelFilter" data-level="Operator">Operator</button>
+            <button class="levelFilter" data-level="Master">Master</button>
+          </div>
+          <div class="module-list" id="moduleList"></div>
+        </div>
+
+        <div class="panel span-4">
+          <h2>12-Week Plan</h2>
+          <div class="week">
+            <h3>Weeks 1-2: Foundations</h3>
+            <ul>
+              <li>Learn Codex thread hygiene, AGENTS.md, sandboxing, and approval flow.</li>
+              <li>Practice PowerShell file search, git status, and small edits.</li>
+            </ul>
+            <h3>Weeks 3-4: Python Workflows</h3>
+            <ul>
+              <li>Build scripts with arguments, logging, config files, and tests.</li>
+              <li>Ask Codex to explain diffs and failure messages.</li>
+            </ul>
+            <h3>Weeks 5-8: DBA Automation</h3>
+            <ul>
+              <li>Create Oracle and PostgreSQL inventory, health check, and report scripts.</li>
+              <li>Use safe placeholders for credentials and server details.</li>
+            </ul>
+            <h3>Weeks 9-12: Delivery</h3>
+            <ul>
+              <li>Use GitHub issues, branches, reviews, and pull requests.</li>
+              <li>Package reusable scripts and document operating procedures.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" id="knowledgebase" style="margin-top: 16px;">
+        <div class="panel span-12">
+          <h2>Knowledgebase</h2>
+          <div class="knowledge-list" id="knowledgeList"></div>
+        </div>
+      </section>
+
+      <section class="grid" id="practice" style="margin-top: 16px;">
+        <div class="panel span-6">
+          <h2>Daily Codex Habits</h2>
+          <div class="habit-list" id="habitList"></div>
+        </div>
+        <div class="panel span-6">
+          <h2>Prompt Templates</h2>
+          <div class="knowledge-list">
+            <div class="kb-item">
+              <h3>Code Change</h3>
+              <p>Goal: change __. Constraints: keep existing style, check git status first, run relevant tests, explain files changed.</p>
+            </div>
+            <div class="kb-item">
+              <h3>Debugging</h3>
+              <p>Error: __. What I tried: __. Expected result: __. Please inspect the code, find root cause, fix it, and verify.</p>
+            </div>
+            <div class="kb-item">
+              <h3>DB Script</h3>
+              <p>Create a Python script for __. Use oracledb thin mode or psycopg2. Do not include real credentials, hostnames, or customer data.</p>
+            </div>
+            <div class="kb-item">
+              <h3>Review</h3>
+              <p>Review this change for bugs, regressions, missing tests, security risks, and unclear behavior. Put findings first.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" id="notes" style="margin-top: 16px;">
+        <div class="panel span-12">
+          <h2>Personal Notes</h2>
+          <textarea id="notesBox" class="note-area" placeholder="Keep your Codex lessons, commands, mistakes, and reusable prompts here."></textarea>
+          <div class="footer-actions" style="margin-top: 12px;">
+            <button id="exportBtn">Export Progress</button>
+            <button id="resetBtn" class="danger">Reset Tracking</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const modules = [
+      {
+        id: "setup",
+        level: "Starter",
+        title: "Workspace Setup and AGENTS.md",
+        text: "Know where projects live, how Codex reads instructions, and how to keep long-term guidance in repo files.",
+        tags: ["AGENTS.md", "workspace", "Windows"]
+      },
+      {
+        id: "threads",
+        level: "Starter",
+        title: "Thread Hygiene",
+        text: "Use one thread per task or project. Archive old chats and avoid relying on memory for durable instructions.",
+        tags: ["workflow", "context"]
+      },
+      {
+        id: "powershell",
+        level: "Starter",
+        title: "PowerShell Basics",
+        text: "Practice Get-ChildItem, Select-String, git status, running Python, and reading command output.",
+        tags: ["PowerShell", "commands"]
+      },
+      {
+        id: "git",
+        level: "Builder",
+        title: "Git and GitHub Flow",
+        text: "Learn status, diff, add, commit, branches, pull requests, and when to ask before pushing.",
+        tags: ["git", "GitHub"]
+      },
+      {
+        id: "edits",
+        level: "Builder",
+        title: "Scoped Code Edits",
+        text: "Ask for focused changes, let Codex inspect the codebase, and verify behavior after edits.",
+        tags: ["coding", "tests"]
+      },
+      {
+        id: "python",
+        level: "Builder",
+        title: "Python Automation",
+        text: "Build scripts with argparse, logging, config files, virtual environments, and tests.",
+        tags: ["Python", "automation"]
+      },
+      {
+        id: "oracle",
+        level: "Operator",
+        title: "Oracle DBA Scripts",
+        text: "Use oracledb thin mode, parameterized SQL, safe config, and no committed credentials.",
+        tags: ["Oracle", "oracledb"]
+      },
+      {
+        id: "postgres",
+        level: "Operator",
+        title: "PostgreSQL DBA Scripts",
+        text: "Use psycopg2, parameterized SQL, connection config, and reusable report output.",
+        tags: ["PostgreSQL", "psycopg2"]
+      },
+      {
+        id: "reviews",
+        level: "Operator",
+        title: "Code Reviews",
+        text: "Ask Codex to review for bugs, regressions, security concerns, and missing tests before merging.",
+        tags: ["review", "quality"]
+      },
+      {
+        id: "debug",
+        level: "Master",
+        title: "Debugging With Evidence",
+        text: "Give logs, commands, expected behavior, and recent changes. Ask Codex to reproduce, isolate, fix, and verify.",
+        tags: ["debugging", "logs"]
+      },
+      {
+        id: "docs",
+        level: "Master",
+        title: "Documentation and Runbooks",
+        text: "Turn repeated work into README files, checklists, runbooks, and reusable prompts.",
+        tags: ["docs", "runbooks"]
+      },
+      {
+        id: "security",
+        level: "Master",
+        title: "Security and Sensitive Data",
+        text: "Never commit passwords, wallets, connection strings, hostnames, usernames, customer details, or server-specific data.",
+        tags: ["security", "DBA"]
+      }
+    ];
+
+    const kb = [
+      {
+        title: "How To Ask Codex Well",
+        category: "Prompting",
+        body: "State the goal, current problem, constraints, important files, what you already tried, and how success should be verified.",
+        bullets: ["Give real errors, not just descriptions.", "Ask for implementation when you want code changed.", "Ask for review when you want risk analysis first."]
+      },
+      {
+        title: "What Codex Should Check First",
+        category: "Workflow",
+        body: "For repository edits, check git status, read project instructions, inspect nearby code, then make the smallest useful change.",
+        bullets: ["Use rg for searching.", "Avoid reverting unrelated user changes.", "Run focused tests after edits."]
+      },
+      {
+        title: "Windows PowerShell Essentials",
+        category: "Commands",
+        body: "Use PowerShell-native commands for local work in this workspace.",
+        bullets: ["List files: Get-ChildItem -Force", "Search files: rg pattern", "Run Python: python script.py"]
+      },
+      {
+        title: "Python Script Standards",
+        category: "Python",
+        body: "Prefer readable scripts with argparse, logging, clear functions, and no hard-coded secrets.",
+        bullets: ["Use config files or environment variables.", "Add dry-run modes for risky operations.", "Write output that can be copied into reports."]
+      },
+      {
+        title: "Oracle DBA Notes",
+        category: "Database",
+        body: "For Oracle examples, prefer the Python oracledb package in thin mode unless thick mode is specifically needed.",
+        bullets: ["Use bind variables.", "Keep wallets and credentials out of git.", "Sanitize hostnames and customer data."]
+      },
+      {
+        title: "PostgreSQL DBA Notes",
+        category: "Database",
+        body: "For PostgreSQL examples, prefer psycopg2 and parameterized queries.",
+        bullets: ["Use connection parameters safely.", "Avoid string-built SQL.", "Capture timings and row counts for reports."]
+      },
+      {
+        title: "Git Basics To Master",
+        category: "Git",
+        body: "The daily commands are status, diff, branch, add, commit, log, and push.",
+        bullets: ["Check status before edits.", "Read diffs before commit.", "Ask before pushing unless pushing was explicitly requested."]
+      },
+      {
+        title: "Verification Mindset",
+        category: "Quality",
+        body: "A task is not finished until the change is verified or the limitation is clearly stated.",
+        bullets: ["Run tests when available.", "Run the script with safe sample inputs.", "Inspect generated files or UI output."]
+      }
+    ];
+
+    const habits = [
+      { id: "habit-status", title: "Start with status", text: "Check current folder, git state, and project instructions." },
+      { id: "habit-context", title: "Give Codex context", text: "Include goal, constraints, files, errors, and expected output." },
+      { id: "habit-small", title: "Work in small changes", text: "Prefer one clear task at a time, then verify." },
+      { id: "habit-diff", title: "Read the diff", text: "Review what changed before committing." },
+      { id: "habit-notes", title: "Save lessons", text: "Move durable guidance into AGENTS.md, README.md, or notes." }
+    ];
+
+    const state = {
+      filter: "all",
+      visibility: "all",
+      search: ""
+    };
+
+    let saved = {};
+    try {
+      saved = JSON.parse(localStorage.getItem("codex-master-plan") || "{}");
+    } catch {
+      saved = {};
+    }
+
+    function isDone(id) {
+      return Boolean(saved[id]);
+    }
+
+    function setDone(id, value) {
+      saved[id] = value;
+      localStorage.setItem("codex-master-plan", JSON.stringify(saved));
+      render();
+    }
+
+    function matchesSearch(text) {
+      return text.toLowerCase().includes(state.search.toLowerCase());
+    }
+
+    function renderModules() {
+      const list = document.getElementById("moduleList");
+      list.innerHTML = "";
+      modules
+        .filter(item => state.filter === "all" || item.level === state.filter)
+        .filter(item => state.visibility === "all" || (state.visibility === "done" ? isDone(item.id) : !isDone(item.id)))
+        .filter(item => matchesSearch([item.title, item.text, item.level, item.tags.join(" ")].join(" ")))
+        .forEach(item => {
+          const div = document.createElement("div");
+          div.className = "module level";
+          div.dataset.level = item.level;
+          div.innerHTML = `
+            <div class="module-head">
+              <input type="checkbox" ${isDone(item.id) ? "checked" : ""} aria-label="Mark ${item.title} complete">
+              <label>
+                <strong>${item.title}</strong>
+                <span class="muted">${item.text}</span>
+                <span class="tag-row">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</span>
+              </label>
+              <span class="tag">${item.level}</span>
+            </div>
+          `;
+          div.querySelector("input").addEventListener("change", event => setDone(item.id, event.target.checked));
+          list.appendChild(div);
+        });
+    }
+
+    function renderKnowledge() {
+      const list = document.getElementById("knowledgeList");
+      list.innerHTML = "";
+      kb
+        .filter(item => matchesSearch([item.title, item.category, item.body, item.bullets.join(" ")].join(" ")))
+        .forEach(item => {
+          const div = document.createElement("div");
+          div.className = "kb-item";
+          div.innerHTML = `
+            <div class="kb-head">
+              <span class="tag">${item.category}</span>
+              <div>
+                <h3>${item.title}</h3>
+                <p class="muted">${item.body}</p>
+                <ul>${item.bullets.map(point => `<li>${point}</li>`).join("")}</ul>
+              </div>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+    }
+
+    function renderHabits() {
+      const list = document.getElementById("habitList");
+      list.innerHTML = "";
+      habits
+        .filter(item => state.visibility === "all" || (state.visibility === "done" ? isDone(item.id) : !isDone(item.id)))
+        .filter(item => matchesSearch([item.title, item.text].join(" ")))
+        .forEach(item => {
+          const div = document.createElement("div");
+          div.className = "habit";
+          div.innerHTML = `
+            <input type="checkbox" ${isDone(item.id) ? "checked" : ""} aria-label="Mark ${item.title} complete">
+            <label>
+              <strong>${item.title}</strong>
+              <span class="muted">${item.text}</span>
+            </label>
+          `;
+          div.querySelector("input").addEventListener("change", event => setDone(item.id, event.target.checked));
+          list.appendChild(div);
+        });
+    }
+
+    function setBar(id, percent) {
+      document.getElementById(id).style.width = `${percent}%`;
+    }
+
+    function renderProgress() {
+      const taskDone = modules.filter(item => isDone(item.id)).length;
+      const habitDone = habits.filter(item => isDone(item.id)).length;
+      const totalDone = taskDone + habitDone;
+      const total = modules.length + habits.length;
+      const overall = Math.round((totalDone / total) * 100);
+      const taskPercent = Math.round((taskDone / modules.length) * 100);
+      const habitPercent = Math.round((habitDone / habits.length) * 100);
+
+      document.getElementById("overallPercent").textContent = `${overall}%`;
+      document.getElementById("sidePercent").textContent = `${overall}%`;
+      document.getElementById("taskCount").textContent = `${taskDone}/${modules.length}`;
+      document.getElementById("habitCount").textContent = `${habitDone}/${habits.length}`;
+      setBar("overallBar", overall);
+      setBar("sideProgress", overall);
+      setBar("taskBar", taskPercent);
+      setBar("habitBar", habitPercent);
+
+      const level = overall >= 85 ? "Master" : overall >= 55 ? "Operator" : overall >= 25 ? "Builder" : "Starter";
+      const next = modules.find(item => !isDone(item.id));
+      document.getElementById("focusLevel").textContent = level;
+      document.getElementById("nextStep").textContent = next ? `Next: ${next.title}` : "Everything is complete.";
+    }
+
+    function render() {
+      renderModules();
+      renderKnowledge();
+      renderHabits();
+      renderProgress();
+    }
+
+    document.getElementById("search").addEventListener("input", event => {
+      state.search = event.target.value.trim();
+      render();
+    });
+
+    document.querySelectorAll(".levelFilter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".levelFilter").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        state.filter = button.dataset.level;
+        render();
+      });
+    });
+
+    document.getElementById("showAll").addEventListener("click", () => setVisibility("all", "showAll"));
+    document.getElementById("showOpen").addEventListener("click", () => setVisibility("open", "showOpen"));
+    document.getElementById("showDone").addEventListener("click", () => setVisibility("done", "showDone"));
+
+    function setVisibility(value, activeId) {
+      state.visibility = value;
+      ["showAll", "showOpen", "showDone"].forEach(id => document.getElementById(id).classList.toggle("active", id === activeId));
+      render();
+    }
+
+    const notesBox = document.getElementById("notesBox");
+    notesBox.value = localStorage.getItem("codex-master-notes") || "";
+    notesBox.addEventListener("input", () => localStorage.setItem("codex-master-notes", notesBox.value));
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (confirm("Reset all progress and notes?")) {
+        localStorage.removeItem("codex-master-plan");
+        localStorage.removeItem("codex-master-notes");
+        Object.keys(saved).forEach(key => delete saved[key]);
+        notesBox.value = "";
+        render();
+      }
+    });
+
+    document.getElementById("exportBtn").addEventListener("click", async () => {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        completedRoadmap: modules.filter(item => isDone(item.id)).map(item => item.title),
+        completedHabits: habits.filter(item => isDone(item.id)).map(item => item.title),
+        notes: notesBox.value
+      };
+      const json = JSON.stringify(payload, null, 2);
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(json);
+        alert("Progress copied to clipboard as JSON.");
+        return;
+      }
+      notesBox.value = `${notesBox.value}\n\nExported progress:\n${json}`.trim();
+      localStorage.setItem("codex-master-notes", notesBox.value);
+      alert("Clipboard is unavailable. Progress was added to Personal Notes.");
+    });
+
+    render();
+  </script>
+</body>
+</html>
